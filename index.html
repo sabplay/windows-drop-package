@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Drop Package</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Windows Drop Package</h1>
+        <p>A simple tool to download the latest release from GitHub.</p>
+        <button onclick="downloadLatest()">Download Latest Release</button>
+        <a href="https://github.com/sabplay/windows-drop-package" target="_blank">Visit GitHub Repository</a>
+    </div>
+
+    <script>
+        async function downloadLatest() {
+            try {
+                let response = await fetch('https://api.github.com/repos/sabplay/windows-drop-package/releases/latest');
+                let data = await response.json();
+                let downloadUrl = data.assets[0].browser_download_url;
+                window.location.href = downloadUrl;
+            } catch (error) {
+                alert('Failed to fetch the latest release. Please try again later.');
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
